@@ -1,0 +1,7 @@
+type TokenCreated @entity {
+  id: ID!
+  tokenAddress: String!
+  owner: String!
+  name: String!
+  symbol: String!
+}

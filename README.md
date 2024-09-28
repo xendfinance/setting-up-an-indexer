@@ -1,8 +1,8 @@
-# SubQuery - Example Project for Asset Chain Testnet
+# Indexer SubQuery Tutorial - Example Project for Asset Chain Testnet
 
 [SubQuery](https://subquery.network) is a fast, flexible, and reliable open-source data indexer that provides you with custom APIs for your web3 project across all of our supported networks. To learn about how to get started with SubQuery, [visit our docs](https://academy.subquery.network).
 
-**This SubQuery project indexes all transfers and approval events for the WRWA (`0x0FA7527F1050bb9F9736828B689c652AB2c483ef`) on Asset Chain Testnet**
+**This SubQuery project indexes all TokenCreated events for the Multitokenlauncher (`0x6fCc46E73E5B96479F6fA731893534b6Ec6bf5E1`) on Asset Chain Testnet**
 
 ## Start
 
@@ -38,53 +38,36 @@ You can observe the three services start, and once all are running (it may take 
 
 For this project, you can try to query with the following GraphQL code to get a taste of how it works.
 
+
 ```graphql
-{
-  query {
-    transfers(first: 5, orderBy: VALUE_DESC) {
-      totalCount
-      nodes {
+query GetAllTokensCreated {
+  tokenCreateds{
+    edges {
+      node {
         id
-        blockHeight
-        from
-        to
-        value
-        contractAddress
+        tokenAddress
+        owner
+        name
+        symbol
       }
-    }
-  }
-  approvals(first: 5, orderBy: BLOCK_HEIGHT_DESC) {
-    nodes {
-      id
-      blockHeight
-      owner
-      spender
-      value
-      contractAddress
     }
   }
 }
 ```
 
-You can explore the different possible queries and entities to help you with GraphQL using the documentation draw on the right.
+```graphql
+query GetSingleTokenCreated {
+  tokenCreated(id: "0xbb5d708468aefcbca97711c99d7c7db270c7c521059367c64703b7edf785472c") {
+    id
+    tokenAddress
+    owner
+    name
+    symbol
+  }
+}
+```
 
-## Publish your project
 
-SubQuery is open-source, meaning you have the freedom to run it in the following three ways:
-
-- Locally on your own computer (or a cloud provider of your choosing), [view the instructions on how to run SubQuery Locally](https://academy.subquery.network/run_publish/run.html)
-- By publishing it to our enterprise-level [Managed Service](https://managedservice.subquery.network), where we'll host your SubQuery project in production ready services for mission critical data with zero-downtime blue/green deployments. We even have a generous free tier. [Find out how](https://academy.subquery.network/run_publish/publish.html)
-- By publishing it to the decentralised [SubQuery Network](https://app.subquery.network), the most open, performant, reliable, and scalable data service for dApp developers. The SubQuery Network indexes and services data to the global community in an incentivised and verifiable way
 
 ## What Next?
-
-Take a look at some of our advanced features to take your project to the next level!
-
-- [**Multi-chain indexing support**](https://academy.subquery.network/build/multi-chain.html) - SubQuery allows you to index data from across different layer-1 networks into the same database, this allows you to query a single endpoint to get data for all supported networks.
-- [**Dynamic Data Sources**](https://academy.subquery.network/build/dynamicdatasources.html) - When you want to index factory contracts, for example on a DEX or generative NFT project.
-- [**Project Optimisation Advice**](https://academy.subquery.network/build/optimisation.html) - Some common tips on how to tweak your project to maximise performance.
-- [**GraphQL Subscriptions**](https://academy.subquery.network/run_publish/subscription.html) - Build more reactive front end applications that subscribe to changes in your SubQuery project.
-
-## Need Help?
-
-The fastest way to get support is by [searching our documentation](https://academy.subquery.network), or by [joining our discord](https://discord.com/invite/subquery) and messaging us in the `#technical-support` channel.
+You can play around with the Deployed project on The [**Subquery Explorer**](https://explorer.subquery.network/subquery/KodeSage/indexer-tutorials) 
